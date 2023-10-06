@@ -6,6 +6,7 @@ const addBlogs = async (req, res) => {
 
   try {
     const userExist = await User.findById(user);
+    console.log(userExist);
     if (!userExist) {
       return res.status(400).send("unable to find by this ID");
     }
@@ -19,6 +20,7 @@ const addBlogs = async (req, res) => {
     image,
     user,
   });
+
 
   try {
     const session = await mongoose.startSession();
