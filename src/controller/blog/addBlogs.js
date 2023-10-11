@@ -14,25 +14,24 @@ const addBlogs = async (req, res) => {
     res.send(error);
   }
 
-  const blogs = new blog({
+  const blogsData = new blog({
     title,
     description,
     image,
     user,
   });
 
-
   try {
     const session = await mongoose.startSession();
     session.startTransaction();
-    await blogs.save({ session });
-    userExist.blog.push(blogs);
+    await blogsData.save({ session });
+    userExist.blog.push(blogsData);
     await userExist.save({ session });
     await session.commitTransaction();
   } catch (error) {
     return res.status(500).send(error);
   }
-  return res.status(200).send({ blogs });
+  return res.status(200).send({ blogsData });
 };
 
 module.exports = addBlogs;
